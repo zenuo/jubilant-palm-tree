@@ -14,16 +14,16 @@ public class LazyInitialization {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("等待");
+        System.out.println("Timed wait");
         TimeUnit.SECONDS.sleep(2L);
         System.out.println(getHelper());
     }
 
     private static class HelperHolder {
-        public static final Helper helper = new Helper();
+        static final Helper helper = new Helper();
 
         static {
-            System.out.println("加载");
+            System.out.println("Initialization");
         }
     }
 }
@@ -33,3 +33,9 @@ class Helper {
         System.out.println("Helper");
     }
 }
+
+/* output:
+Timed wait
+Initialization
+jublilant.winner.Helper@6b143ee9
+ */

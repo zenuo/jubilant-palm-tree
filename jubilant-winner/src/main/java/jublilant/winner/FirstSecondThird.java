@@ -1,4 +1,4 @@
-package zenuo.jublilant.winner;
+package jublilant.winner;
 
 import java.util.concurrent.Semaphore;
 
