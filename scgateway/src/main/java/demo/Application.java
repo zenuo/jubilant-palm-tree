@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
- * 说明
+ * 网关应用
  *
  * @author zenuo
- * @date 2019/06/04
+ * @date 2019/06/04v
  */
 @RestController
 @EnableConfigurationProperties(UriConfiguration.class)

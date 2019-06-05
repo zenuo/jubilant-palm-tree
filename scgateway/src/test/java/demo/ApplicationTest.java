@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 /**
- * 说明
+ * 单元测试
  *
  * @author zenuo
  * @date 2019/06/04
@@ -21,11 +21,12 @@ import org.springframework.test.web.reactive.server.WebTestClient;
         properties = {"httpbin=http://localhost:${wiremock.server.port}"})
 @AutoConfigureWireMock(port = 0)
 public class ApplicationTest {
+
     @Autowired
     private WebTestClient webTestClient;
 
     @Test
-    public void contextLoads() throws Exception {
+    public void contextLoads() {
         //Stubs
         WireMock.stubFor(
                 WireMock.get(WireMock.urlEqualTo("/get"))
