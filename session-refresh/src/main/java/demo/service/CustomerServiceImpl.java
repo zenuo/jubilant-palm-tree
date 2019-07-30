@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 @Slf4j
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
@@ -44,6 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setFirstName("H");
             session.update(customer);
             session.flush();
+            log.info(customer.toString());
             // 结果：JdbcTemplate更新无效，Hibernate更新有效
             // 原因：JdbcTemplate更新被Hibernate覆盖
         }
@@ -63,6 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setFirstName("H");
             session.update(customer);
             session.flush();
+            log.info(customer.toString());
             // 结果：JdbcTemplate和Hibernate更新都有效
             // 原因：JdbcTemplate更新之后，被Hibernate重新从数据库读取（因为在同个事务，所以可见），Hibernate再执行更新，更新结果体现了两者
         }
