@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 @Slf4j
 @Service
-@Transactional(rollbackFor = Exception.class)
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateWithoutRefresh(Long id) {
         try (final Session session = entityManager.unwrap(Session.class)) {
             final Customer customer = session.load(Customer.class, id);
-            // 立即加载
+            // 请知悉：若无此行，则结果为“JdbcTemplate和Hibernate更新都有效”；原因是load方法返回一个代理实例，访问其属性时才会查询数据库，此处不展开
             log.info(customer.toString());
             // 执行JdbcTemplate更新
             jdbcTemplate.update("update customer set lastName = ? where id = ?", "J", id);
