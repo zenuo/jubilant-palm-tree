@@ -6,9 +6,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
-/**
- * @author 袁臻
- */
 public class Consumer {
     public static void main(String[] args) {
         final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("consumer.xml");
