@@ -23,7 +23,7 @@ import java.util.Vector;
 @BenchmarkHistoryChart(labelWith = LabelType.CUSTOM_KEY, maxRuns = 20)
 @AxisRange(min = 0, max = 1)
 @BenchmarkMethodChart(filePrefix = "benchmark-lists")
-@BenchmarkOptions(benchmarkRounds = 20, warmupRounds = 3)
+@BenchmarkOptions(benchmarkRounds = 20, warmupRounds = 3, concurrency = 2)
 public class BenchmarkWithCharts {
 
     private static Object singleton = new Object();
