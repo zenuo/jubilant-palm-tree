@@ -1,13 +1,12 @@
 package demo.dubbo.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * @author 袁臻
- */
 @Data
+@Builder
 public class UserVO implements Serializable {
 
     private Integer id;
