@@ -7,7 +7,7 @@
 execute:
 
 ```bash
-mvn exec:java -Dexec.mainClass=software.AntlrMySQL
+mvn clean compile exec:java -Dexec.mainClass=software.AntlrMySQL
 ```
 
 output
