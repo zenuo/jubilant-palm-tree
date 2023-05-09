@@ -1885,6 +1885,10 @@ variableClause
     : LOCAL_ID | GLOBAL_ID | ( ('@' '@')? (GLOBAL | SESSION | LOCAL)  )? uid
     ;
 
+templateParameterClause
+    : ':' uid
+    ;
+
 showCommonEntity
     : CHARACTER SET | COLLATION | DATABASES | SCHEMAS
     | FUNCTION STATUS | PROCEDURE STATUS
@@ -2591,6 +2595,7 @@ functionArg
 expression
     : notOperator=(NOT | '!') expression                            #notExpression
     | expression logicalOperator expression                         #logicalExpression
+    | expression templatePrefix logicalOperator expression templateSuffix                         #templatelogicalExpression
     | predicate IS NOT? testValue=(TRUE | FALSE | UNKNOWN)          #isExpression
     | predicate                                                     #predicateExpression
     ;
@@ -2619,6 +2624,7 @@ expressionAtom
     | mysqlVariable                                                 #mysqlVariableExpressionAtom
     | unaryOperator expressionAtom                                  #unaryExpressionAtom
     | BINARY expressionAtom                                         #binaryExpressionAtom
+    | templateParameterClause                                       #templateParameterClauseAtom
     | '(' expression (',' expression)* ')'                          #nestedExpressionAtom
     | ROW '(' expression (',' expression)+ ')'                      #nestedRowExpressionAtom
     | EXISTS '(' selectStatement ')'                                #existsExpressionAtom
@@ -2640,6 +2646,14 @@ comparisonOperator
 
 logicalOperator
     : AND | '&' '&' | XOR | OR | '|' '|'
+    ;
+
+templatePrefix
+    : '{'
+    ;
+
+templateSuffix
+    : '}'
     ;
 
 bitOperator
